@@ -4,6 +4,7 @@ const operatorButtons = document.querySelectorAll('.operator')
 const equalButton = document.querySelector('.equals')
 //const calculator = document.querySelector('#calculator')
 const displayArea = document.querySelector('.display')
+// A new html element to display the full operation apart from the result to be able to operate on more than two numbers
 const cashArea = document.querySelector('.numCash')
 /*-------------------------------- Variables --------------------------------*/
 let insertedNumbers = []
@@ -13,9 +14,8 @@ let result = 0
 
 /*-------------------------------- Functions --------------------------------*/
 const doOperation = () => {
-  //console.log(`doOperation ${operator}`)
-
   for (let i = 0; i < insertedNumbers.length; i++) {
+    // checking if the first value has been added yet so we can start the operation
     if (result) {
       switch (operator) {
         case '+':
@@ -33,10 +33,12 @@ const doOperation = () => {
           break
       }
     } else {
+      //set the variable result with the first number input so we can operate on it in the next iteration
       result = parseInt(insertedNumbers[i])
     }
   }
   displayArea.innerText = result
+  // Prepare our calculator to the next operation by removing all the last operation stored values
   result = 0
   insertedNumbers = []
 }
